@@ -60,11 +60,11 @@ const TodoApp = () => {
 
   return (
     <div className="w-2/4 mx-auto ">
-      <h2 className="text-4xl text-center mb-10 font-bold relative">
-        Simple Todo App
+      <h2 className="text-5xl text-center mb-10 font-bold relative">
+        Simple <span className="text-orange-500">Todo</span> App
       </h2>
       <div className="bg-white p-8">
-        <span className="absolute top-[228px] left-[430px]">
+        <span className="absolute top-[235px] left-[430px]">
           <IoDocumentTextOutline className="text-2xl" />
         </span>
         <input
@@ -73,12 +73,12 @@ const TodoApp = () => {
           onChange={handleInput}
           name=""
           className="py-5 w-full px-10 rounded-md  outline-none bg-[#F3F4F6]"
-          placeholder="type your todo..."
+          placeholder="Type your list..."
           id=""
         />
         <span
           onClick={handleAdded}
-          className="absolute top-[228px] cursor-pointer right-[430px]"
+          className="absolute top-[235px] cursor-pointer right-[430px]"
         >
           <IoMdAddCircleOutline className="text-2xl" />
         </span>
