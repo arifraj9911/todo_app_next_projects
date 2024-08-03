@@ -14,7 +14,7 @@ export const toggle = (todoId)=>{
     }
 }
 
-export const handleDelete = (todoId)=>{
+export const deleteTodo = (todoId)=>{
     return {
         type:DELETE,
         payload:todoId

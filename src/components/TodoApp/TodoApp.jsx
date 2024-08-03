@@ -4,7 +4,8 @@ import React, { useState } from "react";
 import { IoDocumentTextOutline } from "react-icons/io5";
 import { IoMdAddCircleOutline } from "react-icons/io";
 import { useDispatch, useSelector } from "react-redux";
-import { toggle } from "@/redux/actions";
+import { deleteTodo, toggle } from "@/redux/actions";
+import { IoMdRemoveCircle } from "react-icons/io";
 
 const TodoApp = () => {
   const todos = useSelector((state) => state);
@@ -13,6 +14,10 @@ const TodoApp = () => {
   const handleToggle = (todoId) => {
     dispatch(toggle(todoId));
   };
+
+  const handleDelete = (todoId)=>{
+    dispatch(deleteTodo(todoId))
+  }
 
   // console.log(todos)
 
@@ -40,7 +45,8 @@ const TodoApp = () => {
         <hr className="my-6" />
         <div className="flex flex-col">
           {todos.map((todo) => (
-            <div className="flex" key={todo.id}>
+            <div key={todo.id} className="flex justify-between space-y-2">
+                <div className="flex" >
               <div className="rounded-full bg-white border-2  w-5 h-5 flex flex-shrink-0 justify-center items-center mr-2 border-green-500 focus-within:border-green-500">
                 <input
                   type="checkbox"
@@ -61,6 +67,10 @@ const TodoApp = () => {
               <span className={`${todo.completed && "line-through"}`}>
                 {todo.text}
               </span>
+            </div>
+            <button onClick={()=>handleDelete(todo.id)}>
+            <IoMdRemoveCircle className="text-2xl text-red-500"/>
+            </button>
             </div>
           ))}
         </div>
