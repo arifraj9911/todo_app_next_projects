@@ -1,4 +1,4 @@
-const { ADDED, DELETE, TOGGLE } = require("./actionTypes");
+const { ADDED, DELETE, TOGGLE, ALLCOMPLETE, CLEARCOMPLETE } = require("./actionTypes");
 import { initialState } from "./initialState";
 
 const nextId = (todo) => {
@@ -31,6 +31,15 @@ const reducer = (state = initialState, action) => {
 
     case DELETE:
       return state.filter((todo) => todo.id !== action.payload);
+    case ALLCOMPLETE:
+        return state.map(todo=>{
+            return {
+                ...todo,
+                completed:true
+            }
+        })
+    case CLEARCOMPLETE:
+        return state.filter(todo=>!todo.completed)
     default:
       return state;
   }

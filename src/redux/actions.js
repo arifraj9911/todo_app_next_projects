@@ -1,4 +1,4 @@
-import { ADDED, DELETE, TOGGLE } from "./actionTypes"
+import { ADDED, ALLCOMPLETE, CLEARCOMPLETE, DELETE, TOGGLE } from "./actionTypes"
 
 export const addedTodo = (todo) =>{
     return {
@@ -18,5 +18,17 @@ export const deleteTodo = (todoId)=>{
     return {
         type:DELETE,
         payload:todoId
+    }
+}
+
+export const allcomplete = ()=>{
+    return {
+        type:ALLCOMPLETE
+    }
+}
+
+export const clearcomplete = ()=>{
+    return {
+        type:CLEARCOMPLETE
     }
 }

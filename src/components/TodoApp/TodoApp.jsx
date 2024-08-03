@@ -4,7 +4,13 @@ import React, { useEffect, useState } from "react";
 import { IoDocumentTextOutline } from "react-icons/io5";
 import { IoMdAddCircleOutline } from "react-icons/io";
 import { useDispatch, useSelector } from "react-redux";
-import { addedTodo, deleteTodo, toggle } from "@/redux/actions";
+import {
+  addedTodo,
+  allcomplete,
+  clearcomplete,
+  deleteTodo,
+  toggle,
+} from "@/redux/actions";
 import { IoMdRemoveCircle } from "react-icons/io";
 
 const TodoApp = () => {
@@ -30,6 +36,13 @@ const TodoApp = () => {
 
   const handleDelete = (todoId) => {
     dispatch(deleteTodo(todoId));
+  };
+
+  const handleAllComplete = () => {
+    dispatch(allcomplete());
+  };
+  const handleClearComplete = () => {
+    dispatch(clearcomplete());
   };
 
   const completedTask = () => {
@@ -102,10 +115,27 @@ const TodoApp = () => {
           ))}
         </div>
         <hr className="my-6" />
-        <p className="text-gray-500 text-sm">
-          {" "}
-          {incompleteTodo} Task completed
-        </p>
+        <div className="grid grid-cols-2 justify-between  items-center">
+          <p className="text-gray-500 text-sm">
+            {" "}
+            {incompleteTodo} Task completed
+          </p>
+          <div className="flex gap-2 mt-1 justify-end">
+            <p
+              onClick={handleAllComplete}
+              className="text-gray-500 text-sm hover:text-blue-500 cursor-pointer"
+            >
+              All Complete
+            </p>
+            <div className="text-gray-500">||</div>
+            <p
+              onClick={handleClearComplete}
+              className="text-gray-500 text-sm hover:text-blue-500 cursor-pointer"
+            >
+              Clear Complete
+            </p>
+          </div>
+        </div>
       </div>
     </div>
   );
