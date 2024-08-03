@@ -3,16 +3,21 @@
 import React, { useState } from "react";
 import { IoDocumentTextOutline } from "react-icons/io5";
 import { IoMdAddCircleOutline } from "react-icons/io";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { toggle } from "@/redux/actions";
 
 const TodoApp = () => {
+  const todos = useSelector((state) => state);
+  const dispatch = useDispatch();
 
-    const todos = useSelector((state)=>state);
+  const handleToggle = (todoId) => {
+    dispatch(toggle(todoId));
+  };
 
-    console.log(todos)
+  // console.log(todos)
 
-  const [isCompleted, setIsCompleted] = useState(false);
-  
+  //   const [isCompleted, setIsCompleted] = useState(false);
+
   return (
     <div className="w-2/4 mx-auto ">
       <h2 className="text-4xl text-center mb-10 font-bold relative">
@@ -33,25 +38,31 @@ const TodoApp = () => {
           <IoMdAddCircleOutline className="text-2xl" />
         </span>
         <hr className="my-6" />
-        <div className="flex items-center">
-          <div className="rounded-full bg-white border-2  w-5 h-5 flex flex-shrink-0 justify-center items-center mr-2 border-green-500 focus-within:border-green-500">
-            <input
-              type="checkbox"
-              onChange={() => setIsCompleted(!isCompleted)}
-              className="opacity-0 absolute rounded-full"
-              name=""
-              id=""
-            />
-            {isCompleted && (
-              <svg
-                className=" fill-current w-3 h-3 text-green-500 pointer-events-none"
-                viewBox="0 0 20 20"
-              >
-                <path d="M0 11l2-2 5 5L18 3l2 2L7 18z" />
-              </svg>
-            )}
-          </div>
-          <span className={`${isCompleted && 'line-through'}`}>Exploring JavaScript Language</span>
+        <div className="flex flex-col">
+          {todos.map((todo) => (
+            <div className="flex" key={todo.id}>
+              <div className="rounded-full bg-white border-2  w-5 h-5 flex flex-shrink-0 justify-center items-center mr-2 border-green-500 focus-within:border-green-500">
+                <input
+                  type="checkbox"
+                  onChange={() => handleToggle(todo.id)}
+                  className="opacity-0 absolute rounded-full"
+                  name=""
+                  id=""
+                />
+                {todo.completed && (
+                  <svg
+                    className=" fill-current w-3 h-3 text-green-500 pointer-events-none"
+                    viewBox="0 0 20 20"
+                  >
+                    <path d="M0 11l2-2 5 5L18 3l2 2L7 18z" />
+                  </svg>
+                )}
+              </div>
+              <span className={`${todo.completed && "line-through"}`}>
+                {todo.text}
+              </span>
+            </div>
+          ))}
         </div>
       </div>
     </div>

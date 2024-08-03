@@ -1,9 +1,16 @@
-import { ADDED, DELETE } from "./actionTypes"
+import { ADDED, DELETE, TOGGLE } from "./actionTypes"
 
 export const handleAdded = (todo) =>{
     return {
         type:ADDED,
         payload:todo
+    }
+}
+
+export const toggle = (todoId)=>{
+    return {
+        type:TOGGLE,
+        payload:todoId
     }
 }
 
