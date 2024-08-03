@@ -1,8 +1,18 @@
-import React from "react";
+"use client";
+
+import React, { useState } from "react";
 import { IoDocumentTextOutline } from "react-icons/io5";
 import { IoMdAddCircleOutline } from "react-icons/io";
+import { useSelector } from "react-redux";
 
 const TodoApp = () => {
+
+    const todos = useSelector((state)=>state);
+
+    console.log(todos)
+
+  const [isCompleted, setIsCompleted] = useState(false);
+  
   return (
     <div className="w-2/4 mx-auto ">
       <h2 className="text-4xl text-center mb-10 font-bold relative">
@@ -27,18 +37,21 @@ const TodoApp = () => {
           <div className="rounded-full bg-white border-2  w-5 h-5 flex flex-shrink-0 justify-center items-center mr-2 border-green-500 focus-within:border-green-500">
             <input
               type="checkbox"
+              onChange={() => setIsCompleted(!isCompleted)}
               className="opacity-0 absolute rounded-full"
               name=""
               id=""
             />
-            <svg
-              className=" fill-current w-3 h-3 text-green-500 pointer-events-none"
-              viewBox="0 0 20 20"
-            >
-              <path d="M0 11l2-2 5 5L18 3l2 2L7 18z" />
-            </svg>
+            {isCompleted && (
+              <svg
+                className=" fill-current w-3 h-3 text-green-500 pointer-events-none"
+                viewBox="0 0 20 20"
+              >
+                <path d="M0 11l2-2 5 5L18 3l2 2L7 18z" />
+              </svg>
+            )}
           </div>
-          <span>Exploring JavaScript Language</span>
+          <span className={`${isCompleted && 'line-through'}`}>Exploring JavaScript Language</span>
         </div>
       </div>
     </div>
