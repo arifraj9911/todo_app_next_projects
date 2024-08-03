@@ -1,6 +1,6 @@
 import { ADDED, DELETE, TOGGLE } from "./actionTypes"
 
-export const handleAdded = (todo) =>{
+export const addedTodo = (todo) =>{
     return {
         type:ADDED,
         payload:todo
